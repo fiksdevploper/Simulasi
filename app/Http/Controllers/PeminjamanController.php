@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Inventaris;
+use App\Models\Peminjaman;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class PeminjamanController extends Controller
+{
+    public function index()
+    {
+        $peminjaman = Peminjaman::all();
+        return view('admin.peminjaman.index', compact('peminjaman'));
+    }
+
+    public function create()
+    {
+        $inventaris = Inventaris::where('stok', '>', 0)->get();
+        return view('index.peminjaman', compact('inventaris'));
+    }
+
+    public function store(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'inventaris_id' => 'required|exists:inventaris,id',
+            'nama_barang' => 'required',
+            'nama_peminjam' => 'required',
+            'tanggal_pinjam' => 'required|date',
+            'tanggal_kembali' => 'required|date|after:tanggal_pinjam',
+            'petugas' => 'required',
+        ]);
+
+        $inventaris = Inventaris::find($request->id_inventaris)->first();
+
+        if ($inventaris->stok == 0) {
+            // menyimpan data
+            Peminjaman::create([
+                'id_inventaris' => $request->id_inventaris,
+                'nama_barang' => $inventaris->nama_barang,
+                'nama_peminjam' => $request->nama_peminjam,
+                'tanggal_pinjam' => $request->tanggal_pinjam,
+                'tanggal_kembali' => $request->tanggal_kembali,
+                'status_peminjaman' => 'Proses',  // Status awal peminjaman
+            ]);
+
+            // Mengurangi stok barang
+            $inventaris->stok = $inventaris->stok - 1;
+            
+            return redirect()->route('peminjaman.index')->with('error', 'Stok barang kosong.');
+
+        } else {
+            return back()->with('error', 'Stok barang kosong.');
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        // validasi input
+        $request->validate([
+            'status_peminjaman' => 'required|in:Belum Kembali,Sudah Kembali,Proses,Batal',
+        ]);
+
+        $peminjaman = Peminjaman::findOrFail($id);
+        $peminjaman->status_peminjaman = $request->status_peminjaman;
+
+        // Jika status peminjaman sudah kembali, tambah stok inventaris
+        if ($request->status_peminjaman == 'Sudah Kembali') {
+            $inventaris = Inventaris::where('id_inventaris', $peminjaman->id_inventaris)->first();
+            $inventaris->increment('stok');
+        }
+
+        $peminjaman->save();
+
+        return redirect()->route('peminjaman.index')->with('success', 'Status peminjaman berhasil diupdate');
+    }
+
+    // Menghapus peminjaman
+    public function destroy($id)
+    {
+        $peminjaman = Peminjaman::findOrFail($id);
+        $peminjaman->delete();
+
+        return redirect()->route('peminjaman.index')->with('success', 'Peminjaman berhasil dihapus');
+    }
+}
