@@ -31,7 +31,6 @@ class InventarisController extends Controller
         ]);
 
         Inventaris::create($request->only(['id_inventaris', 'nama_barang', 'kondisi', 'stok', 'tanggal_register']));
-
         return redirect()->route('inventaris.index');
     }
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('id_inventaris')->unique();
             $table->string('nama_barang');
             $table->enum('kondisi', ['baik', 'perbaikan']);
-        $table->integer('stok');
+            $table->integer('stok');
             $table->date('tanggal_register');
             $table->timestamps();
         });

@@ -22,11 +22,11 @@ Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminj
         Route::prefix('admin')->middleware('auth')->group(function () {
             // Inventaris routes
             // pake resource we mun 1 controller mah
-          Route::resource('inventaris', InventarisController::class);
+            Route::resource('inventaris', InventarisController::class);
         
             // Peminjaman routes
             Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('admin.peminjaman.index');
-            Route::put('/peminjaman/update', [PeminjamanController::class, 'update'])->name('peminjaman.updateStatus');
+            Route::put('/peminjaman/update/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.updateStatus');
         });
     // end inventaris admin
  // end route admin
