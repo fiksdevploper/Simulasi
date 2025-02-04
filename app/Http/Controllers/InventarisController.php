@@ -40,28 +40,28 @@ class InventarisController extends Controller
         return view('admin.inventaris.index', compact('inventaris'));
     }
 
-    public function edit(Inventaris $inventaris)
+    public function edit(Inventaris $inventari)
     {
-        return view('admin.inventaris.edit', compact('inventaris'));
+        return view('admin.inventaris.edit', compact('inventari'));
     }
 
-    public function update(Request $request, Inventaris $inventaris)
+    public function update(Request $request, Inventaris $inventari)
     {
         $request->validate([
-            'id_inventaris' => 'required|unique:inventaris,id_inventaris,' . $inventaris->id,
+            'id_inventaris' => 'required|unique:inventaris,id_inventaris,'.$inventari->id,
             'nama_barang' => 'required',
             'kondisi' => 'required',
             'stok' => 'required',
             'tanggal_register' => 'required',
         ]);
 
-        $inventaris->update($request->all());
+        $inventari->update($request->all());
         return redirect()->route('inventaris.index');
     }
 
-    public function destroy(Inventaris $inventaris)
+    public function destroy(Inventaris $inventari)
     {
-        $inventaris->delete();
+        $inventari->delete();
         return redirect()->route('inventaris.index');
     }
 }

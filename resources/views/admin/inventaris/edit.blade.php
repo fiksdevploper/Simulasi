@@ -5,14 +5,14 @@
     <div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold mb-4 text-center text-gray-700">Edit Data Inventaris</h2>
     
-        <form action="{{ route('inventaris.update', $inventaris->id) }}" method="POST">
+        <form action="{{ route('inventaris.update', $inventari->id) }}" method="POST">
             @csrf
             @method('PUT')
             {{-- id barang --}}
             <div class="mb-4">
                 <label for="id_inventaris" class="block text-gray-600 font-semibold mb-1">ID Inventaris</label>
                 <input type="text" name="id_inventaris" id="id_inventaris"
-                value="{{ old('id_inventaris', $inventaris->id_inventaris) }}"
+                value="{{ old('id_inventaris', $inventari->id_inventaris) }}"
                 class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
             </div>
     
@@ -20,7 +20,7 @@
             <div class="mb-4">
                 <label for="nama_barang" class="block text-gray-600 font-semibold mb-1">Nama Barang</label>
                 <input type="text" name="nama_barang" id="nama_barang"
-                value="{{ old('nama_barang', $inventaris->nama_barang) }}"
+                value="{{ old('nama_barang', $inventari->nama_barang) }}"
                 class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
             </div>
     
@@ -29,9 +29,8 @@
                 <label for="kondisi" class="block text-gray-600 font-semibold mb-1">Kondisi</label>
                 <select name="kondisi" id="kondisi"
                     class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-                    <option value="Baik" {{ $inventaris->kondisi == 'Baik' ? 'selected' : '' }}>Baik</option>
-                    <option value="Rusak Ringan" {{ $inventaris->kondisi == 'Rusak Ringan' ? 'selected' : '' }}>Rusak Ringan</option>
-                    <option value="Rusak Berat" {{ $inventaris->kondisi == 'Rusak Berat' ? 'selected' : '' }}>Rusak Berat</option>
+                    <option value="baik" {{ $inventari->kondisi == 'baik' ? 'selected' : '' }}>Baik</option>
+                    <option value="perbaikan" {{ $inventari->kondisi == 'perbaikan' ? 'selected' : '' }}>Perbaikan</option>
                 </select>
             </div>
     
@@ -39,7 +38,7 @@
             <div class="mb-4">
                 <label for="stok" class="block text-gray-600 font-semibold mb-1">Stok</label>
                 <input type="number" name="stok" id="stok"
-                value="{{ old('stok', $inventaris->stok) }}"
+                value="{{ old('stok', $inventari->stok) }}"
                 class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
             </div>
     
@@ -47,7 +46,7 @@
             <div class="mb-4">
                 <label for="tanggal_register" class="block text-gray-600 font-semibold mb-1">Tanggal Register</label>
                 <input type="date" name="tanggal_register" id="tanggal_register"
-                value="{{ old('tanggal_register', $inventaris->tanggal_register) }}"
+                value="{{ old('tanggal_register', $inventari->tanggal_register) }}"
                 class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
             </div>
     
