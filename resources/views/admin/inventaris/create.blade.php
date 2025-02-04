@@ -17,7 +17,7 @@
             </div>
         @endif
     
-        <form action="{{ route('admin.inventaris.store') }}" method="POST" class="space-y-4">
+        <form action="{{ route('inventaris.store') }}" method="POST" class="space-y-4">
             @csrf
             <div>
                 <label for="id_inventaris" class="block text-gray-700">Kode Barang:</label>
@@ -42,10 +42,9 @@
                 <select id="kondisi" name="kondisi" required
                     class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-400">
                     <option value="">Pilih kondisi</option>
-                    <option value="Baik">Baik</option>
-                    <option value="Perbaikan">Proses Perbaikan</option>
-                    <option value="Rusak Ringan">Rusak Ringan</option>
-                    <option value="Rusak Berat">Rusak Berat</option>
+                    //value nya samain sm isi enum huruf besar kecil nya
+                    <option value="baik">Baik</option>
+                    <option value="perbaikan">Proses Perbaikan</option>
                 </select>
             </div>
     
@@ -56,7 +55,7 @@
             </div>
     
             <div class="flex justify-end space-x-2">
-                <a href="{{ route('admin.inventaris.index') }}" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">Batal</a>
+                <a href="{{ route('inventaris.index') }}" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">Batal</a>
                 <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Simpan</button>
             </div>
         </form>

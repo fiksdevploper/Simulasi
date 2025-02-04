@@ -31,7 +31,7 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($infoLogin)) {
-            return redirect()->route('admin.inventaris.index');
+            return redirect()->route('inventaris.index');
         } else {
             return redirect()->back()->with('error', 'Email atau password salah');
         }        

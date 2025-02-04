@@ -23,14 +23,16 @@ class InventarisController extends Controller
         $request->validate([
             'id_inventaris' => 'required|unique:inventaris',
             'nama_barang' => 'required',
-            'kondisi' => 'required',
+            // salah
+            // 'kondisi' => 'required',
+            'kondisi' => 'required|in:baik,perbaikan',
             'stok' => 'required',
             'tanggal_register' => 'required',
         ]);
 
         Inventaris::create($request->only(['id_inventaris', 'nama_barang', 'kondisi', 'stok', 'tanggal_register']));
 
-        return redirect()->route('admin.inventaris.index');
+        return redirect()->route('inventaris.index');
     }
 
     public function show(Inventaris $inventaris)
@@ -54,12 +56,12 @@ class InventarisController extends Controller
         ]);
 
         $inventaris->update($request->all());
-        return redirect()->route('admin.inventaris.index');
+        return redirect()->route('inventaris.index');
     }
 
     public function destroy(Inventaris $inventaris)
     {
         $inventaris->delete();
-        return redirect()->route('admin.inventaris.index');
+        return redirect()->route('inventaris.index');
     }
 }

@@ -5,7 +5,7 @@
     <div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold mb-4 text-center text-gray-700">Edit Data Inventaris</h2>
     
-        <form action="{{ route('admin.inventaris.update', $inventaris->id) }}" method="POST">
+        <form action="{{ route('inventaris.update', $inventaris->id) }}" method="POST">
             @csrf
             @method('PUT')
             {{-- id barang --}}
@@ -57,7 +57,7 @@
                 class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">
                 Simpan Perubahan
                 </button>
-                <a href="{{ route('admin.inventaris.index') }}"
+                <a href="{{ route('inventaris.index') }}"
                 class="text-gray-500 hover:text-gray-700 transition duration-300">Batal</a>
             </div>
         </form>

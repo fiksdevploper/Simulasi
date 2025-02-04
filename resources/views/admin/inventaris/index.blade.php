@@ -14,7 +14,7 @@
             <div class="bg-white shadow-md rounded-lg p-6">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xl font-semibold">Daftar Inventaris</h2>
-                    <a href="{{ route('admin.inventaris.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    <a href="{{ route('inventaris.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                         Tambah Inventaris
                     </a>
                 </div>
@@ -40,12 +40,12 @@
                     
                             <!-- Button Action -->
                             <td class="py-2 px-4 border-b text-center space-x-2">
-                                <a href="{{ route('admin.inventaris.edit', $item->id) }}" 
+                                <a href="{{ route('inventaris.edit', $item->id) }}" 
                                    class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700 transition duration-300">
                                    Edit
                                 </a>
                     
-                                <form action="{{ route('admin.inventaris.destroy', $item->id) }}" 
+                                <form action="{{ route('inventaris.destroy', $item->id) }}" 
                                       method="POST" class="inline-block" 
                                       onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?');">
                                     @csrf

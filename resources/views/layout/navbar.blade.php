@@ -7,7 +7,7 @@
         <div class="hidden md:flex space-x-6">
             <a href="{{ route('home') }}" class="text-white hover:text-gray-300 transition duration-300">Home</a>
             <a href="{{ route('peminjaman.index') }}" class="text-white hover:text-gray-300 transition duration-300">Peminjaman</a>
-            <a href="{{ route('admin.login') }}" class="text-white hover:text-gray-300 transition duration-300">Admin</a>
+            <a href="{{ route('inventaris.index') }}" class="text-white hover:text-gray-300 transition duration-300">Admin</a>
         </div>
 
         <!-- Hamburger untuk mobile -->

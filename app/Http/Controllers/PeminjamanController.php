@@ -25,20 +25,24 @@ class PeminjamanController extends Controller
     {
         // Validasi input
         $request->validate([
-            'inventaris_id' => 'required|exists:inventaris,id',
-            'nama_barang' => 'required',
+            'id_inventaris' => 'required|exists:inventaris,id_inventaris',
             'nama_peminjam' => 'required',
             'tanggal_pinjam' => 'required|date',
             'tanggal_kembali' => 'required|date|after:tanggal_pinjam',
             'petugas' => 'required',
         ]);
+        //salah
+        // $inventaris = Inventaris::find($request->id_inventaris)->first();
+        $inventaris = Inventaris::where('id_inventaris', $request->id_inventaris)->first();
 
-        $inventaris = Inventaris::find($request->id_inventaris)->first();
-
-        if ($inventaris->stok == 0) {
+        if ($inventaris->stok <= 0) {
+            return redirect()->back()
+                ->with('error', 'Stok barang tidak tersedia')
+                ->withInput();
+        }
             // menyimpan data
             Peminjaman::create([
-                'id_inventaris' => $request->id_inventaris,
+                'id_inventaris' => $inventaris->id_inventaris,
                 'nama_barang' => $inventaris->nama_barang,
                 'nama_peminjam' => $request->nama_peminjam,
                 'tanggal_pinjam' => $request->tanggal_pinjam,
@@ -47,13 +51,9 @@ class PeminjamanController extends Controller
             ]);
 
             // Mengurangi stok barang
-            $inventaris->stok = $inventaris->stok - 1;
-            
-            return redirect()->route('peminjaman.index')->with('error', 'Stok barang kosong.');
-
-        } else {
-            return back()->with('error', 'Stok barang kosong.');
-        }
+            $inventaris->decrement('stok', 1);
+            return redirect()->route('home')
+            ->with('success', 'Peminjaman berhasil ditambahkan');
     }
 
     public function update(Request $request, $id)

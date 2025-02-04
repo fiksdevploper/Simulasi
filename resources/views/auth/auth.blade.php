@@ -9,7 +9,7 @@
     <div class="min-h-screen flex items-center justify-center bg-gray-100">
         <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
             <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">Login Form</h2>
-            <form action="{{ route('admin.login') }}" method="POST" class="space-y-4">
+            <form action="{{ route('admin.authenticate') }}" method="POST" class="space-y-4">
                 @csrf
                 <!-- Nama -->
                 <div>

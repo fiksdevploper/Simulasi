@@ -41,20 +41,20 @@
                                 <td class="py-2 px-4 border-b text-center">
                                     <form action="{{ route('peminjaman.updateStatus', $pinjam->id) }}" method="POST">
                                         @csrf
-                                        @method('PATCH')
+                                        @method('PUT')
                                         <select name="status_peminjaman" onchange="this.form.submit()"
                                             class="border border-gray-300 rounded-md p-2">
                                             <option value="Belum Kembali"
-                                                {{ $peminjaman->status_peminjaman == 'Belum Kembali' ? 'selected' : '' }}>
+                                                {{ $pinjam->status_peminjaman == 'Belum Kembali' ? 'selected' : '' }}>
                                                 Belum Kembali</option>
                                             <option value="Sudah Kembali"
-                                                {{ $peminjaman->status_peminjaman == 'Sudah Kembali' ? 'selected' : '' }}>
+                                                {{ $pinjam->status_peminjaman == 'Sudah Kembali' ? 'selected' : '' }}>
                                                 Sudah Kembali</option>
                                         </select>
                                     </form>
                                 </td>
 
-                                <td class="py-2 px-4 border-b text-center">{{ $item->petugas }}</td>
+                                <td class="py-2 px-4 border-b text-center">{{ $pinjam->petugas }}</td>
                                 <td class="py-2 px-4 border-b text-center">
                                     <!-- Action Buttons if needed -->
                                     <form action="" method="POST" class="inline-block"
