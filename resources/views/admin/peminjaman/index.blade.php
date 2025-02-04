@@ -57,7 +57,7 @@
                                 <td class="py-2 px-4 border-b text-center">{{ $pinjam->petugas }}</td>
                                 <td class="py-2 px-4 border-b text-center">
                                     <!-- Action Buttons if needed -->
-                                    <form action="" method="POST" class="inline-block"
+                                    <form action="{{ route('peminjaman.destroy', $pinjam->id) }}" method="POST" class="inline-block"
                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?');">
                                         @csrf
                                         @method('DELETE')
@@ -66,6 +66,7 @@
                                             Hapus
                                         </button>
                                     </form>
+                                    
                                 </td>
                                 </td>
                             </tr>

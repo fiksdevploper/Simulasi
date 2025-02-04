@@ -27,6 +27,7 @@ Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminj
             // Peminjaman routes
             Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('admin.peminjaman.index');
             Route::put('/peminjaman/update/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.updateStatus');
+            Route::delete('/admin/peminjaman/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
         });
     // end inventaris admin
  // end route admin
