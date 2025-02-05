@@ -15,8 +15,8 @@ Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminj
 // route admin inventaris
     // inventaris admin
         // AUTH admin
-        Route::get('/admin/login', [AuthController::class, 'login'])->name('login');
-        Route::post('/admin/login', [AuthController::class, 'postLogin'])->name('admin.authenticate');
+        Route::get('/auth/admin', [AuthController::class, 'login'])->name('login');
+        Route::post('/auth/admin', [AuthController::class, 'postLogin'])->name('admin.authenticate');
         
         // Menampilkan daftar inventaris
         Route::prefix('admin')->middleware('auth')->group(function () {
