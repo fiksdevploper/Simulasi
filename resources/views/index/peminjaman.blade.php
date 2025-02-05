@@ -8,20 +8,20 @@
     <div class="max-w-lg mx-auto p-6 mt-8 bg-white rounded-lg shadow-md">
         <h2 class="text-2xl font-semibold text-center mb-6">Form Peminjaman Barang Inventaris</h2>
         @if ($errors->any())
-        <div class="bg-red-100 text-red-700 p-4 rounded-md mb-4">
-            <ul class="list-disc list-inside">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+            <div class="bg-red-100 text-red-700 p-4 rounded-md mb-4">
+                <ul class="list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-    @if (session('success'))
-        <div class="bg-green-100 text-green-700 p-4 rounded-md mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
+        @if (session('success'))
+            <div class="bg-green-100 text-green-700 p-4 rounded-md mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
     
         <form action="{{ route('peminjaman.store') }}" method="POST">
             @csrf
