@@ -23,8 +23,6 @@ class InventarisController extends Controller
         $request->validate([
             'id_inventaris' => 'required|unique:inventaris',
             'nama_barang' => 'required',
-            // salah
-            // 'kondisi' => 'required',
             'kondisi' => 'required|in:baik,perbaikan',
             'stok' => 'required',
             'tanggal_register' => 'required',

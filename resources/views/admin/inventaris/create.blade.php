@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('layout.haeader')
-<title>tambah barang</title>
+<title>Dashboard Admin</title>
 
 <body>
     <div class="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md mt-10">

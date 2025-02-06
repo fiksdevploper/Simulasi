@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('layout.haeader')
+<title>Dashboard Admin</title>
 
 <body>
     <div class="flex">
         <!-- Sidebar -->
         @include('layout.sider')
+
         <!-- Main Content -->
         <div class="flex-1 p-8">
             <!-- Tabel Peminjaman -->
@@ -15,6 +17,7 @@
                         {{ session('success') }}
                     </div>
                 @endif
+
                 <table class="min-w-full bg-white">
                     <thead>
                         <tr>
@@ -55,19 +58,18 @@
                                 </td>
 
                                 <td class="py-2 px-4 border-b text-center">{{ $pinjam->petugas }}</td>
-                                <td class="py-2 px-4 border-b text-center">
-                                    <!-- Action Buttons if needed -->
-                                    <form action="{{ route('peminjaman.destroy', $pinjam->id) }}" method="POST" class="inline-block"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 transition duration-300">
-                                            Hapus
-                                        </button>
-                                    </form>
-                                    
-                                </td>
+                                    <td class="py-2 px-4 border-b text-center">
+                                        <!-- Action Buttons if needed -->
+                                        <form action="{{ route('peminjaman.destroy', $pinjam->id) }}" method="POST" class="inline-block"
+                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 transition duration-300">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    </td>
                                 </td>
                             </tr>
                         @endforeach

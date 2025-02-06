@@ -5,22 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Inventaris;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
 
 class PeminjamanController extends Controller
 {
+    // controll peminjaman admin
     public function index()
     {
         $peminjaman = Peminjaman::all();
         return view('admin.peminjaman.index', compact('peminjaman'));
     }
 
+    // buat peminjaman
     public function create()
     {
         $inventaris = Inventaris::where('stok', '>', 0)->get();
         return view('index.peminjaman', compact('inventaris'));
     }
 
+    // simpan peminjaman ke dashboard admin
     public function store(Request $request)
     {
         // Validasi input
@@ -31,8 +34,8 @@ class PeminjamanController extends Controller
             'tanggal_kembali' => 'required|date|after:tanggal_pinjam',
             'petugas' => 'required',
         ]);
-        //salah
-        // $inventaris = Inventaris::find($request->id_inventaris)->first();
+
+        // Cek stok
         $inventaris = Inventaris::where('id_inventaris', $request->id_inventaris)->first();
 
         if ($inventaris->stok <= 0) {
@@ -56,6 +59,7 @@ class PeminjamanController extends Controller
             ->with('success', 'Peminjaman berhasil ditambahkan');
     }
 
+    // update status peminjaman
     public function update(Request $request, $id)
     {
         // validasi input
