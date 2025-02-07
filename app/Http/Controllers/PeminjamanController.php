@@ -77,7 +77,7 @@ class PeminjamanController extends Controller
         }
 
         $peminjaman->save();
-
+        
         return redirect()->route('peminjaman.index')->with('success', 'Status peminjaman berhasil diupdate');
     }
 

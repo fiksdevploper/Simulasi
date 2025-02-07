@@ -13,6 +13,20 @@ class InventarisController extends Controller
         return view('admin.inventaris.index', compact('inventaris'));
     }
 
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $inventaris = Inventaris::when($search, function ($query, $search) {
+            return $query->where('nama_barang', 'like', "%{$search}%")
+                         ->orWhere('id_inventaris', 'like', "%{$search}%")
+                         ->orWhere('kondisi', 'like', "%{$search}%");
+        })->get();
+
+        return response()->json($inventaris);
+    }
+    
     public function create()
     {
         return view('admin.inventaris.create');
@@ -20,7 +34,7 @@ class InventarisController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'id_inventaris' => 'required|unique:inventaris',
             'nama_barang' => 'required',
             'kondisi' => 'required|in:baik,perbaikan',
@@ -28,7 +42,7 @@ class InventarisController extends Controller
             'tanggal_register' => 'required',
         ]);
 
-        Inventaris::create($request->only(['id_inventaris', 'nama_barang', 'kondisi', 'stok', 'tanggal_register']));
+        Inventaris::create($data);
         return redirect()->route('inventaris.index');
     }
 
@@ -45,7 +59,7 @@ class InventarisController extends Controller
     public function update(Request $request, Inventaris $inventari)
     {
         $request->validate([
-            'id_inventaris' => 'required|unique:inventaris,id_inventaris,'.$inventari->id,
+            'id_inventaris' => 'required|unique:inventaris,id_inventaris,' . $inventari->id,
             'nama_barang' => 'required',
             'kondisi' => 'required',
             'stok' => 'required',

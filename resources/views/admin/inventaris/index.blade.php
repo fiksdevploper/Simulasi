@@ -29,6 +29,7 @@
                             <th class="py-2 px-4 border-b">Tanggal Register</th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         @foreach ($inventaris as $item)
                         <tr class="hover:bg-gray-100">

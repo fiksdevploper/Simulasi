@@ -7,6 +7,8 @@ use App\Http\Controllers\PeminjamanController;
 use Illuminate\Support\Facades\Route;
 
 // home penguna
+Route::get('/inventaris/search', [InventarisController::class, 'search']);
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 // peminjaman
 Route::get('/peminjaman', [PeminjamanController::class, 'create'])->name('peminjaman.index');
@@ -21,6 +23,7 @@ Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminj
         // Menampilkan daftar inventaris
         Route::prefix('admin')->middleware('auth')->group(function () {
             // Inventaris routes
+
             // pake resource we mun 1 controller mah
             Route::resource('inventaris', InventarisController::class);
         

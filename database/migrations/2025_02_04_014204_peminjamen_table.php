@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('status_peminjaman', ['Belum Kembali', 'Sudah Kembali', 'Proses', 'Batal'])->nullable();
             $table->string('petugas')->nullable();
             $table->timestamps();
-
+            
             // relasi database
             $table->foreign('id_inventaris')->references('id_inventaris')->on('inventaris')->onDelete('cascade');
         });
